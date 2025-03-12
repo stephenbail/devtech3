@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-// import java.util.NoSuchElementException;
+import java.util.NoSuchElementException;
 
 
 public class DoublyLinkedListTest {
@@ -23,7 +23,7 @@ public class DoublyLinkedListTest {
     // Tests for get
 
     /**
-     * @author grayson_replace_this
+     * @author grayson
      * @see AddAtIndexOutOfBoundsThrowsException
      */
     @Test
@@ -61,7 +61,7 @@ public class DoublyLinkedListTest {
 
     // Tests for getFirst
     /**
-     * @author Stephen Bail
+     * @author Max Hubenko
      * @see GetFirst
      */
     @Test
@@ -92,7 +92,7 @@ public class DoublyLinkedListTest {
 
     // Tests for isEmpty
     /**
-     * @author Stephen Bail
+     * @author Max Hubenko
      * @see IsEmpty
      */
     @Test
@@ -128,7 +128,7 @@ public class DoublyLinkedListTest {
     // Tests for addFirst
 
     /**
-     * @author Stephen Bail
+     * @author Max Hubenko
      * @see AddFirstAddsElement
      */
     @Test
@@ -141,36 +141,156 @@ public class DoublyLinkedListTest {
         list.addFirst(2);
         assertEquals(2, list.getFirst());
     }
-}
-
-    // Tests for addLast
 
     /**
-     * @author 
-     * @see
+     * @author Stephen Bail
+     * @see GetAddLastAddsElementIncorrectPosition
      */
-    /*@Test
+    @Test
     public void testAddLastAddsElement() {
-        fail("Not yet implemented");
+        if (SHOULD_FAIL) list = new GetAddLastAddsElementIncorrectPosition<>();
+
+        list.addLast(1);
+        list.addLast(2);
+        assertEquals(2 , list.get(1));
+
+        list.addLast(3);
+
+        assertEquals(3, list.get(2));
     }
 
     // Tests for remove
 
     /**
-     * @author 
-     * @see
+     * @author Max Hubenko
+     * @see GetRemoveAtIndexIncorrectRemoval
      */
-    /*@Test
+    @Test
     public void testRemoveAtIndex() {
-        fail("Not yet implemented");
-    } */
+        if (SHOULD_FAIL) list = new GetRemoveAtIndexIncorrectRemoval<>();
+
+        list.addLast(1);
+        list.addLast(2);
+        list.addLast(3);
+        list.addLast(4);
+
+        int removedItem = list.remove(0); 
+
+        assertEquals(1, removedItem);
+        assertEquals(3, list.size()); 
+        assertEquals(3, list.get(1));  
+        assertEquals(4, list.get(2));  
+        
+        assertThrows(IndexOutOfBoundsException.class, () -> list.get(3)); 
+    }
+
 
     // Tests for removeFirst
 
+    /**
+     * @author Stephen Bail
+     * @see GetRemoveFirstBroken
+     */
+    @Test
+    public void testRemoveFirst() {
+        if (SHOULD_FAIL) list = new GetRemoveFirstBroken<>();
+
+
+        assertThrows(NoSuchElementException.class, () -> list.removeFirst());
+
+        list.addLast(1);
+        list.addLast(2);
+        list.addLast(3);
+
+        int removedItem = list.removeFirst();
+        assertEquals(1, removedItem);      
+        assertEquals(2, list.size());       
+        assertEquals(2, list.getFirst());    
+
+        list.removeFirst(); 
+        list.removeFirst(); 
+        assertTrue(list.isEmpty());       
+        assertThrows(NoSuchElementException.class, () -> list.removeFirst());
+    }
+
+
+
+
     // Tests for removeLast
+
+
+    /**
+     * @author Max Hubenko
+     * @see GetRemoveLastBroken
+     */
+    @Test
+    public void testRemoveLast() {
+        if (SHOULD_FAIL) list = new GetRemoveLastBroken<>();
+
+
+        assertThrows(NoSuchElementException.class, () -> list.removeLast());
+
+        list.addLast(1);
+        list.addLast(2);
+        list.addLast(3);
+
+        int removedItem = list.removeLast();
+        assertEquals(3, removedItem);     
+        assertEquals(2, list.size());     
+        assertEquals(2, list.getLast());      
+
+        list.removeLast(); 
+        list.removeLast(); 
+        assertTrue(list.isEmpty()); 
+
+        assertThrows(NoSuchElementException.class, () -> list.removeLast());
+    }
 
     // Tests for size
 
+    /**
+     * @author Stephen Bail
+     * @see GetSizeIncorrect
+     */
+    @Test
+    public void testSize() {
+        if (SHOULD_FAIL) list = new GetSizeIncorrect<>();
+
+        assertEquals(0, list.size());
+
+        list.addLast(1);
+        list.addLast(2);
+        list.addLast(3);
+        assertEquals(3, list.size());
+
+        list.remove(1);
+        assertEquals(2, list.size());
+
+        list.removeFirst(); 
+        assertEquals(1, list.size());
+
+        list.removeLast();
+        assertEquals(0, list.size());
+    }
+
     // Tests for set
 
-//} 
+    /**
+     * @author Max Hubenko
+     * @see GetSetIncorrect
+     */
+    @Test
+    public void testSet() {
+        if (SHOULD_FAIL) list = new GetSetIncorrect<>();
+
+        list.addLast(1);
+        list.addLast(2);
+        list.addLast(3);
+
+        int replacedItem = list.set(0, 100);
+        assertEquals(1, replacedItem);
+        assertEquals(100, list.get(0));
+
+        assertThrows(IndexOutOfBoundsException.class, () -> list.set(3, 100));
+    }
+}

@@ -1,5 +1,5 @@
 /**
- * @author Max Hubenko
+ * @author Stephen Bail
  */
 public class GetFirst<E> extends DoublyLinkedList<E> {
     @Override
